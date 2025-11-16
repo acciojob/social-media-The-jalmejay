@@ -1,47 +1,21 @@
+// src/components/Header.js
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function Header({ onRefresh }) {
-  const navigate = useNavigate();
-  const loc = useLocation();
-
-  const go = (e, to) => {
-    e.preventDefault();
-    navigate(to);
-  };
-
+function Header({onRefresh}) {
   return (
-    <div className="headerBar">
-      <div className="App"><h1>GenZ</h1></div>
-
-      <nav className="navTabs" aria-label="main-nav">
-        <a
-          href="/"
-          className={loc.pathname === "/" ? "active" : ""}
-          onClick={(e) => go(e, "/")}
-        >
-          Posts
-        </a>
-        <a
-          href="/users"
-          className={loc.pathname === "/users" ? "active" : ""}
-          onClick={(e) => go(e, "/users")}
-        >
-          Users
-        </a>
-        <a
-          href="/notifications"
-          className={loc.pathname === "/notifications" ? "active" : ""}
-          onClick={(e) => go(e, "/notifications")}
-        >
-          Notifications
-        </a>
+    <header>
+      <h1>GenZ</h1>
+      <nav>
+        {/* Link renders <a href="/">...</a> in the DOM */}
+        <Link to="/">Posts</Link>
+        <Link to="/users">Users</Link>
+        <Link to="/notifications">Notifications</Link>
       </nav>
-
-      <button className="refreshBtn button" onClick={onRefresh}>
+      <button className="refbutton button" onClick={onRefresh}>
         Refresh Notifications
       </button>
-    </div>
+    </header>
   );
 }
 

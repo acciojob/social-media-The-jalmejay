@@ -1,25 +1,28 @@
+// src/components/PostsPage.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function PostsPage({ posts, users, onReact, onCreate }) {
   const navigate = useNavigate();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const title = fd.get("postTitle")?.toString() || "";
+    const authorId = fd.get("postAuthor")?.toString() || "";
+    const content = fd.get("postContent")?.toString() || "";
+
+    if (!title.trim() || !authorId.trim() || !content.trim()) return;
+
+    onCreate({ title, authorId, content });
+    e.target.reset();
+  };
+
   return (
     <div className="container AppContent">
       <h2 className="sectionTitle">Add a New Post</h2>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const fd = new FormData(e.target);
-          const title = fd.get("postTitle").toString();
-          const author = fd.get("postAuthor");
-          const content = fd.get("postContent").toString();
-          if (!title.trim()) return;
-          onCreate({ title, authorId: author, content });
-          e.target.reset();
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <div className="formRow">
           <label htmlFor="postTitle">Post Title:</label>
           <input
@@ -48,33 +51,26 @@ function PostsPage({ posts, users, onReact, onCreate }) {
             name="postContent"
             placeholder="Write something..."
           />
-
-          <button type="submit" className="viewBtn">
-            Save Post
-          </button>
         </div>
+
+        {/* IMPORTANT: direct child of form → matches `form > button` */}
+        <button type="submit" className="button">
+          Save Post
+        </button>
       </form>
 
       <h2 className="sectionTitle">Posts</h2>
 
       <section className="posts-list">
-        <div className="intro">Latest</div>
+        {/* first child: intro, so new post becomes :nth-child(2) */}
+        <div>Latest</div>
+
         {posts.map((p) => (
           <article key={p.id} className="post">
             <h3>{p.title}</h3>
             <div className="meta">
               by {users.find((u) => u.id === p.authorId)?.name}
-              <span
-                style={{
-                  marginLeft: 8,
-                  color: "#666",
-                  fontStyle: "italic",
-                }}
-              >
-                {p.time}
-              </span>
             </div>
-
             <p className="content">{p.content}</p>
 
             <div className="reactions">
@@ -84,14 +80,14 @@ function PostsPage({ posts, users, onReact, onCreate }) {
                   onClick={() => onReact(p.id, idx)}
                   className="reaction-btn"
                 >
-                  {["👍", "🎉", "❤️", "🚀", "👀"][idx]}{" "}
-                  {idx < 4 ? count : 0}
+                  {["👍", "🎉", "❤️", "🚀", "👀"][idx]} {count}
                 </button>
               ))}
             </div>
 
+            {/* this is `.posts-list > :nth-child(2) > .button` */}
             <button
-              className="viewBtn button"
+              className="button"
               onClick={() => navigate(`/posts/${p.id}`)}
             >
               View Post

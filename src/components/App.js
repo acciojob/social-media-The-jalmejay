@@ -1,11 +1,12 @@
+// src/components/App.js
 import React, { useState } from "react";
-import "./../styles/App.css";
+import "../styles/App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NotificationsPage from "./NotificationsPage";
 import Header from "./Header";
-import PostDetails from "./PostDetails";
 import PostsPage from "./PostsPage";
+import PostDetails from "./PostDetails";
 import UsersPage from "./UsersPage";
+import NotificationsPage from "./NotificationsPage";
 
 const App = () => {
   const initialUsers = [
@@ -23,7 +24,6 @@ const App = () => {
       content:
         "They were lost without the harmonious rabbit that composed their kangaroo.",
       reactions: [0, 0, 0, 0, 0],
-      time: "about 9 hours ago",
     },
     {
       id: "p2",
@@ -32,8 +32,7 @@ const App = () => {
       authorId: "u2",
       content:
         "An unexpected interruption led to a day full of choices and little adventures.",
-      reactions: [2, 1, 0, 0, 0],
-      time: "about 13 hours ago",
+      reactions: [0, 0, 0, 0, 0],
     },
   ];
 
@@ -49,14 +48,14 @@ const App = () => {
       authorId,
       content,
       reactions: [0, 0, 0, 0, 0],
-      time: "just now",
     };
-    // new post becomes .posts-list > :nth-child(2)
+    // new post should become .posts-list > :nth-child(2)
     setPosts((prev) => [newPost, ...prev]);
   };
 
   const handleReact = (postId, idx) => {
-    if (idx === 4) return; // last button must stay 0
+    // 5th button should not change
+    if (idx === 4) return;
     setPosts((prev) =>
       prev.map((p) =>
         p.id === postId
@@ -73,7 +72,9 @@ const App = () => {
 
   const handleSave = (postId, { title, content }) => {
     setPosts((prev) =>
-      prev.map((p) => (p.id === postId ? { ...p, title, content } : p))
+      prev.map((p) =>
+        p.id === postId ? { ...p, title, content } : p
+      )
     );
   };
 
@@ -86,41 +87,47 @@ const App = () => {
 
   return (
     <Router>
-      {/* Header visible on all routes: h1 GenZ + nav links */}
-      <Header onRefresh={refreshNotifications} />
+      <div className="App">
+        {/* .App > :nth-child(1) → Header */}
+        <Header onRefresh={refreshNotifications} />
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PostsPage
-              posts={posts}
-              users={users}
-              onReact={handleReact}
-              onCreate={handleCreate}
-            />
-          }
-        />
-        <Route
-          path="/posts/:id"
-          element={
-            <PostDetails posts={posts} users={users} onSave={handleSave} />
-          }
-        />
-        <Route
-          path="/users"
-          element={<UsersPage users={users} posts={posts} />}
-        />
-        <Route
-          path="/notifications"
-          element={
-            <NotificationsPage
-              notifications={notifications}
-              onRefresh={refreshNotifications}
-            />
-          }
-        />
-      </Routes>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PostsPage
+                posts={posts}
+                users={users}
+                onReact={handleReact}
+                onCreate={handleCreate}
+              />
+            }
+          />
+          <Route
+            path="/posts/:id"
+            element={
+              <PostDetails
+                posts={posts}
+                users={users}
+                onSave={handleSave}
+              />
+            }
+          />
+          <Route
+            path="/users"
+            element={<UsersPage users={users} posts={posts} />}
+          />
+          <Route
+            path="/notifications"
+            element={
+              <NotificationsPage
+                notifications={notifications}
+                onRefresh={refreshNotifications}
+              />
+            }
+          />
+        </Routes>
+      </div>
     </Router>
   );
 };
