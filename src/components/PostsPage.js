@@ -22,19 +22,36 @@ function PostsPage({ posts, users, onReact, onCreate }) {
       >
         <div className="formRow">
           <label htmlFor="postTitle">Post Title:</label>
-          <input id="postTitle" name="postTitle" type="text" placeholder="What's on your mind?" />
+          <input
+            id="postTitle"
+            name="postTitle"
+            type="text"
+            placeholder="What's on your mind?"
+          />
 
           <label htmlFor="postAuthor">Author:</label>
-          <select id="postAuthor" name="postAuthor" defaultValue={users[0]?.id}>
+          <select
+            id="postAuthor"
+            name="postAuthor"
+            defaultValue={users[0]?.id}
+          >
             {users.map((u) => (
-              <option key={u.id} value={u.id}>{u.name}</option>
+              <option key={u.id} value={u.id}>
+                {u.name}
+              </option>
             ))}
           </select>
 
           <label htmlFor="postContent">Content:</label>
-          <textarea id="postContent" name="postContent" placeholder="Write something..." />
+          <textarea
+            id="postContent"
+            name="postContent"
+            placeholder="Write something..."
+          />
 
-          <button type="submit" className="viewBtn">Save Post</button>
+          <button type="submit" className="viewBtn">
+            Save Post
+          </button>
         </div>
       </form>
 
@@ -47,20 +64,36 @@ function PostsPage({ posts, users, onReact, onCreate }) {
             <h3>{p.title}</h3>
             <div className="meta">
               by {users.find((u) => u.id === p.authorId)?.name}
-              <span style={{ marginLeft: 8, color: "#666", fontStyle: "italic" }}>{p.time}</span>
+              <span
+                style={{
+                  marginLeft: 8,
+                  color: "#666",
+                  fontStyle: "italic",
+                }}
+              >
+                {p.time}
+              </span>
             </div>
 
             <p className="content">{p.content}</p>
 
             <div className="reactions">
               {p.reactions.map((count, idx) => (
-                <button key={idx} onClick={() => onReact(p.id, idx)} className="reaction-btn">
-                  {["👍", "🎉", "❤️", "🚀", "👀"][idx]} {idx < 4 ? count : 0}
+                <button
+                  key={idx}
+                  onClick={() => onReact(p.id, idx)}
+                  className="reaction-btn"
+                >
+                  {["👍", "🎉", "❤️", "🚀", "👀"][idx]}{" "}
+                  {idx < 4 ? count : 0}
                 </button>
               ))}
             </div>
 
-            <button className="viewBtn button" onClick={() => navigate(`/posts/${p.id}`)}>
+            <button
+              className="viewBtn button"
+              onClick={() => navigate(`/posts/${p.id}`)}
+            >
               View Post
             </button>
           </article>

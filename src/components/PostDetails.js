@@ -24,28 +24,61 @@ function PostDetails({ posts, users, onSave }) {
             <h2>{post.title}</h2>
             <div className="meta">
               by {users.find((u) => u.id === post.authorId)?.name}
-              <span style={{ marginLeft: 8, color: "#666", fontStyle: "italic" }}>
+              <span
+                style={{
+                  marginLeft: 8,
+                  color: "#666",
+                  fontStyle: "italic",
+                }}
+              >
                 {post.time}
               </span>
             </div>
             <p className="content">{post.content}</p>
 
             <div style={{ marginTop: 12 }}>
-              <button className="button viewBtn" onClick={() => setEditing(true)}>Edit</button>
-              <button style={{ marginLeft: 8 }} className="button" onClick={() => navigate(-1)}>Back</button>
+              <button
+                className="button viewBtn"
+                onClick={() => setEditing(true)}
+              >
+                Edit
+              </button>
+              <button
+                style={{ marginLeft: 8 }}
+                className="button"
+                onClick={() => navigate(-1)}
+              >
+                Back
+              </button>
             </div>
           </>
         ) : (
           <>
             <label htmlFor="postTitle">Title</label>
-            <input id="postTitle" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input
+              id="postTitle"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
 
             <label htmlFor="postContent">Content</label>
-            <textarea id="postContent" value={content} onChange={(e) => setContent(e.target.value)} />
+            <textarea
+              id="postContent"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
 
             <div style={{ marginTop: 8 }}>
-              <button className="viewBtn button" onClick={save}>Save</button>
-              <button style={{ marginLeft: 8 }} onClick={() => setEditing(false)}>Cancel</button>
+              {/* First button: Cancel */}
+              <button onClick={() => setEditing(false)}>Cancel</button>
+              {/* Last button on the page: Save (with .button class) */}
+              <button
+                style={{ marginLeft: 8 }}
+                className="viewBtn button"
+                onClick={save}
+              >
+                Save
+              </button>
             </div>
           </>
         )}

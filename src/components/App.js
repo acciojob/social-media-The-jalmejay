@@ -17,17 +17,21 @@ const App = () => {
   const initialPosts = [
     {
       id: "p1",
-      title: "Draped neatly on a hanger, the cranberries resemble reserved hippopotamus;",
+      title:
+        "Draped neatly on a hanger, the cranberries resemble reserved hippopotamus;",
       authorId: "u1",
-      content: "They were lost without the harmonious rabbit that composed their kangaroo.",
+      content:
+        "They were lost without the harmonious rabbit that composed their kangaroo.",
       reactions: [0, 0, 0, 0, 0],
       time: "about 9 hours ago",
     },
     {
       id: "p2",
-      title: "Waking to the buzz of the alarm clock, their chimpanzee was a witty snail?",
+      title:
+        "Waking to the buzz of the alarm clock, their chimpanzee was a witty snail?",
       authorId: "u2",
-      content: "An unexpected interruption led to a day full of choices and little adventures.",
+      content:
+        "An unexpected interruption led to a day full of choices and little adventures.",
       reactions: [2, 1, 0, 0, 0],
       time: "about 13 hours ago",
     },
@@ -47,15 +51,21 @@ const App = () => {
       reactions: [0, 0, 0, 0, 0],
       time: "just now",
     };
+    // new post becomes .posts-list > :nth-child(2)
     setPosts((prev) => [newPost, ...prev]);
   };
 
   const handleReact = (postId, idx) => {
-    if (idx === 4) return; // last button fixed
+    if (idx === 4) return; // last button must stay 0
     setPosts((prev) =>
       prev.map((p) =>
         p.id === postId
-          ? { ...p, reactions: p.reactions.map((c, i) => (i === idx ? c + 1 : c)) }
+          ? {
+              ...p,
+              reactions: p.reactions.map((c, i) =>
+                i === idx ? c + 1 : c
+              ),
+            }
           : p
       )
     );
@@ -76,20 +86,39 @@ const App = () => {
 
   return (
     <Router>
+      {/* Header visible on all routes: h1 GenZ + nav links */}
       <Header onRefresh={refreshNotifications} />
+
       <Routes>
         <Route
           path="/"
-          element={<PostsPage posts={posts} users={users} onReact={handleReact} onCreate={handleCreate} />}
+          element={
+            <PostsPage
+              posts={posts}
+              users={users}
+              onReact={handleReact}
+              onCreate={handleCreate}
+            />
+          }
         />
         <Route
           path="/posts/:id"
-          element={<PostDetails posts={posts} users={users} onSave={handleSave} />}
+          element={
+            <PostDetails posts={posts} users={users} onSave={handleSave} />
+          }
         />
-        <Route path="/users" element={<UsersPage users={users} posts={posts} />} />
+        <Route
+          path="/users"
+          element={<UsersPage users={users} posts={posts} />}
+        />
         <Route
           path="/notifications"
-          element={<NotificationsPage notifications={notifications} onRefresh={refreshNotifications} />}
+          element={
+            <NotificationsPage
+              notifications={notifications}
+              onRefresh={refreshNotifications}
+            />
+          }
         />
       </Routes>
     </Router>

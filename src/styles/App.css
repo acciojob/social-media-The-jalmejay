@@ -20,7 +20,7 @@ body {
     position: relative;
 }
 
-.headerBar .brand {
+.headerBar .App {
     font-size: 48px;
     font-weight: 800;
 }
@@ -49,7 +49,7 @@ body {
 .refreshBtn {
     position: absolute;
     right: 48px;
-    top: 40px;
+    bottom: 30px;
     background: var(--accent);
     color: white;
     padding: 12px 20px;

@@ -12,7 +12,7 @@ function Header({ onRefresh }) {
 
   return (
     <div className="headerBar">
-      <div className="brand">GenZ</div>
+      <div className="App"><h1>GenZ</h1></div>
 
       <nav className="navTabs" aria-label="main-nav">
         <a
