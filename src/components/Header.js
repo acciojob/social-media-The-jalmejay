@@ -25,7 +25,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-function Header() {
+function Header({ onRefresh }) {
   const location = useLocation();
 
   return (
@@ -49,7 +49,7 @@ function Header() {
         </Link>
       </nav>
       <button className="refbutton button" onClick={onRefresh}>
-        // Refresh Notifications //{" "}
+        Refresh Notifications
       </button>
     </header>
   );

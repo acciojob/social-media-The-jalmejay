@@ -61,9 +61,7 @@ const App = () => {
         p.id === postId
           ? {
               ...p,
-              reactions: p.reactions.map((c, i) =>
-                i === idx ? c + 1 : c
-              ),
+              reactions: p.reactions.map((c, i) => (i === idx ? c + 1 : c)),
             }
           : p
       )
@@ -72,9 +70,7 @@ const App = () => {
 
   const handleSave = (postId, { title, content }) => {
     setPosts((prev) =>
-      prev.map((p) =>
-        p.id === postId ? { ...p, title, content } : p
-      )
+      prev.map((p) => (p.id === postId ? { ...p, title, content } : p))
     );
   };
 
@@ -94,7 +90,7 @@ const App = () => {
             path="/"
             element={
               <>
-                <Header />
+                <Header onRefresh={refreshNotifications} />
                 <PostsPage
                   posts={posts}
                   users={users}
@@ -110,12 +106,8 @@ const App = () => {
             path="/posts/:id"
             element={
               <>
-                <Header />
-                <PostDetails
-                  posts={posts}
-                  users={users}
-                  onSave={handleSave}
-                />
+                <Header onRefresh={refreshNotifications} />
+                <PostDetails posts={posts} users={users} onSave={handleSave} />
               </>
             }
           />
@@ -123,17 +115,26 @@ const App = () => {
           {/* Users page: NO Header (only users list) */}
           <Route
             path="/users"
-            element={<UsersPage users={users} posts={posts} />}
+            element={
+              <>
+                <Header onRefresh={refreshNotifications} />
+                <UsersPage users={users} posts={posts} />
+              </>
+            }
           />
 
           {/* Notifications page: NO Header (only one button here) */}
           <Route
             path="/notifications"
             element={
-              <NotificationsPage
-                notifications={notifications}
-                onRefresh={refreshNotifications}
-              />
+              <>
+                {" "}
+                <Header onRefresh={refreshNotifications} />
+                <NotificationsPage
+                  notifications={notifications}
+                  onRefresh={refreshNotifications}
+                />
+              </>
             }
           />
         </Routes>
