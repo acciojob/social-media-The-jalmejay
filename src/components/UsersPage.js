@@ -7,25 +7,27 @@ function UsersPage({ users, posts }) {
   const visiblePosts = posts.filter((p) => p.authorId === selectedUserId);
 
   return (
-    <div className="container AppContent">
-      <h2>Users</h2>
+    <div className="container">
+      <h2 className="sectionTitle">Users</h2>
 
-      <ul>
-        {users.map((u) => (
-          <li key={u.id}>
-            {/* Cypress looks for `:nth-child(3) > a` */}
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                setSelectedUserId(u.id);
-              }}
-            >
-              {u.name}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div className="usersList">
+        <ul>
+          {users.map((u) => (
+            <li key={u.id}>
+              {/* Cypress uses :nth-child(3) > a etc. */}
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSelectedUserId(u.id);
+                }}
+              >
+                {u.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <section>
         {visiblePosts.map((p) => (

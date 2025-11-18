@@ -49,12 +49,12 @@ const App = () => {
       content,
       reactions: [0, 0, 0, 0, 0],
     };
-    // new post should become .posts-list > :nth-child(2)
+    // New post becomes .posts-list > :nth-child(2)
     setPosts((prev) => [newPost, ...prev]);
   };
 
   const handleReact = (postId, idx) => {
-    // 5th button should not change
+    // 5th button must not change
     if (idx === 4) return;
     setPosts((prev) =>
       prev.map((p) =>
@@ -88,35 +88,45 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        {/* .App > :nth-child(1) → Header */}
-        <Header onRefresh={refreshNotifications} />
-
         <Routes>
+          {/* Home: Header + Posts */}
           <Route
             path="/"
             element={
-              <PostsPage
-                posts={posts}
-                users={users}
-                onReact={handleReact}
-                onCreate={handleCreate}
-              />
+              <>
+                <Header />
+                <PostsPage
+                  posts={posts}
+                  users={users}
+                  onReact={handleReact}
+                  onCreate={handleCreate}
+                />
+              </>
             }
           />
+
+          {/* Post details: Header + PostDetails */}
           <Route
             path="/posts/:id"
             element={
-              <PostDetails
-                posts={posts}
-                users={users}
-                onSave={handleSave}
-              />
+              <>
+                <Header />
+                <PostDetails
+                  posts={posts}
+                  users={users}
+                  onSave={handleSave}
+                />
+              </>
             }
           />
+
+          {/* Users page: NO Header (only users list) */}
           <Route
             path="/users"
             element={<UsersPage users={users} posts={posts} />}
           />
+
+          {/* Notifications page: NO Header (only one button here) */}
           <Route
             path="/notifications"
             element={
