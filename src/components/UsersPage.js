@@ -8,7 +8,7 @@ function UsersPage({ users, posts }) {
 
   return (
     <div className="container">
-      <h2 className="sectionTitle">Users</h2>
+      {/* <h2 className="sectionTitle">Users</h2> */}
 
       <div className="usersList">
         <ul>

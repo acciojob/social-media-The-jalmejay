@@ -30,7 +30,7 @@ function Header({ onRefresh }) {
 
   return (
     <header className="headerBar">
-      <div className="App">GenZ</div>
+      <h1 className="">GenZ</h1>
       <nav className="navTabs">
         <Link to="/" className={location.pathname === "/" ? "active" : ""}>
           Posts
