@@ -54,7 +54,7 @@ export default function UsersPage({users}) {
       <ul className="usersList">
         {users.map((u,index) => (
           <li key={index}>
-            <Link to={`/users/${u.id}`}>{u.name}</Link>
+            <a href={`/users/${u.id}`}>{u.name}</a>
           </li>
         ))}
       </ul>
