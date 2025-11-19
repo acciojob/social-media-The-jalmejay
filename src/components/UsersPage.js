@@ -44,19 +44,17 @@
 // export default UsersPage;
 
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-export default function UsersPage() {
-  const users = useSelector((state) => state.users);
+export default function UsersPage({users}) {
 
   return (
     <div className="container">
       <h2 className="sectionTitle">Users</h2>
       <ul className="usersList">
-        {users.map((u) => (
-          <li key={u}>
-            <Link to={`/users/${u}`}>{u}</Link>
+        {users.map((u,index) => (
+          <li key={index}>
+            <Link to={`/users/${u.id}`}>{u.name}</Link>
           </li>
         ))}
       </ul>
