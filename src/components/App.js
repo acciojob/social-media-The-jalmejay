@@ -84,13 +84,15 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+        <Header onRefresh={refreshNotifications} />
+
         <Routes>
           {/* Home: Header + Posts */}
           <Route
             path="/"
             element={
               <>
-                <Header onRefresh={refreshNotifications} />
+                {/* <Header onRefresh={refreshNotifications} /> */}
                 <PostsPage
                   posts={posts}
                   users={users}
@@ -106,7 +108,7 @@ const App = () => {
             path="/posts/:id"
             element={
               <>
-                <Header onRefresh={refreshNotifications} />
+                {/* <Header onRefresh={refreshNotifications} /> */}
                 <PostDetails posts={posts} users={users} onSave={handleSave} />
               </>
             }
@@ -117,7 +119,7 @@ const App = () => {
             path="/users"
             element={
               <>
-                <Header onRefresh={refreshNotifications} />
+                {/* <Header onRefresh={refreshNotifications} /> */}
                 <Users users={users} posts={posts} />
               </>
             }
@@ -127,7 +129,7 @@ const App = () => {
             path="/notifications"
             element={
               <>
-                <Header onRefresh={refreshNotifications} />
+                {/* <Header onRefresh={refreshNotifications} /> */}
                 <NotificationsPage
                   notifications={notifications}
                   onRefresh={refreshNotifications}
