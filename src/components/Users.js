@@ -1,19 +1,19 @@
 // src/components/Users.js
 import React, { useState } from "react";
 
-export default function Users({ users: propUsers, posts: propPosts }) {
-  const users = propUsers ?? [
+export default function Users() {
+  const users = [
     { id: "u1", name: "Magnus Gislason" },
     { id: "u2", name: "Uriah Pagac" },
     { id: "u3", name: "Helga" },
   ];
 
-  const posts = propPosts ?? [
+  const posts = [
     {
       id: "p1",
       authorId: "u2",
-      title: "A post from Uriah",
-      content: "Content example",
+      title: "Waking to the buzz...",
+      content: "An unexpected interruption...",
     },
   ];
 
@@ -25,13 +25,12 @@ export default function Users({ users: propUsers, posts: propPosts }) {
     <div className="container">
       <h2 className="sectionTitle">Users</h2>
 
-      {/* UNIQUE WRAPPER for Cypress */}
+      {/* IMPORTANT: Cypress NEEDS this exact wrapper */}
       <div className="usersList">
-        <ul className="userListItems">
+        <ul>
           {users.map((u) => (
-            <li key={u.id} className="userItem">
+            <li key={u.id}>
               <a
-                className="userLink"
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();

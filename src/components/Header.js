@@ -1,9 +1,7 @@
-// src/components/Header.js
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Header({ onRefresh }) {
-  const navigate = useNavigate();
   const location = useLocation();
 
   return (
@@ -11,26 +9,23 @@ function Header({ onRefresh }) {
       <h1>GenZ</h1>
 
       <nav className="navTabs">
-        <button
-          onClick={() => navigate("/")}
-          className={location.pathname === "/" ? "active" : ""}
-        >
+        <Link to="/" className={location.pathname === "/" ? "active" : ""}>
           Posts
-        </button>
+        </Link>
 
-        <button
-          onClick={() => navigate("/users")}
+        <Link
+          to="/users"
           className={location.pathname === "/users" ? "active" : ""}
         >
           Users
-        </button>
+        </Link>
 
-        <button
-          onClick={() => navigate("/notifications")}
+        <Link
+          to="/notifications"
           className={location.pathname === "/notifications" ? "active" : ""}
         >
           Notifications
-        </button>
+        </Link>
       </nav>
 
       <button className="refbutton button" onClick={onRefresh}>
