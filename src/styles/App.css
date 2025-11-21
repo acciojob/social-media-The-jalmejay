@@ -221,3 +221,13 @@ li a:hover {
     margin-bottom: 5px;
     border-radius: 4px;
 }
+
+.usersList ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .userListItems > li > a {
+    display: inline-block;
+  }
+  

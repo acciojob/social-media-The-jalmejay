@@ -113,15 +113,20 @@ const App = () => {
           />
 
           {/* Users page: NO Header (only users list) */}
-          <Route path="/users" element={<Users users={users} posts={posts} />} />
+          <Route
+            path="/users"
+            element={
+              <>
+                <Header onRefresh={refreshNotifications} />
+                <Users users={users} posts={posts} />
+              </>
+            }
+          />
 
-
-          {/* Notifications page: NO Header (only one button here) */}
           <Route
             path="/notifications"
             element={
               <>
-                {" "}
                 <Header onRefresh={refreshNotifications} />
                 <NotificationsPage
                   notifications={notifications}
