@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./Header";
 import PostsPage from "./PostsPage";
 import PostDetails from "./PostDetails";
-import UsersPage from "./UsersPage";
 import NotificationsPage from "./NotificationsPage";
+import Users from "./Users";
 
 const App = () => {
   const initialUsers = [
@@ -118,7 +118,7 @@ const App = () => {
             element={
               <>
                 <Header onRefresh={refreshNotifications} />
-                <UsersPage users={users} posts={posts} />
+                <Users />
               </>
             }
           />
